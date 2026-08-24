@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#3427d6" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Korbio" />
+    <meta name="description" content="Händler vergleichen, Produkte sammeln und Einkaufsaufträge verwalten." />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./assets/icon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Korbio – alles in einem Korb</title>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <button class="brand" type="button" data-view="discover" aria-label="Korbio Startseite">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 44 44"><path d="M10 18h24l-2.5 16.5A4 4 0 0 1 27.6 38H16.4a4 4 0 0 1-3.9-3.5L10 18Z"/><path d="M16 20c0-8 2.5-13 6-13s6 5 6 13" class="brand-handle"/></svg>
+          </span>
+          <span>Korbio</span><span class="brand-badge">PRIVAT</span>
+        </button>
+
+        <nav class="main-nav" aria-label="Hauptnavigation">
+          <button class="nav-link is-active" type="button" data-view="discover">Entdecken</button>
+          <button class="nav-link" type="button" data-view="orders">Meine Aufträge <span class="nav-count" id="order-count">0</span></button>
+          <button class="nav-link" type="button" data-view="support">Support <span class="nav-count" id="support-nav-progress">0%</span></button>
+        </nav>
+
+        <div class="top-actions">
+          <button class="location-button" type="button" id="location-button" aria-label="Lieferort ändern">
+            <span class="location-pin" aria-hidden="true">⌖</span>
+            <span><small>Lieferort</small><strong id="location-label">Berlin 10115</strong></span>
+            <span aria-hidden="true">⌄</span>
+          </button>
+          <button class="icon-button install-button" type="button" id="install-button" aria-label="App installieren" title="App installieren">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 17v3h14v-3"/></svg>
+          </button>
+          <button class="token-button" type="button" id="token-button" aria-label="Token-Guthaben öffnen">
+            <span class="token-coin" aria-hidden="true">K</span>
+            <span class="token-button-copy"><small>Guthaben</small><strong><b id="token-balance">0</b> Token</strong></span>
+          </button>
+          <button class="family-user-button" type="button" id="family-user-button" aria-label="Familienkonto abmelden" hidden>
+            <span aria-hidden="true">☺</span><strong id="family-user-name">Familie</strong>
+          </button>
+          <button class="cart-button" type="button" id="cart-button" aria-label="Warenkorb öffnen">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L20.5 8H6.3M10 20h.01M17 20h.01"/></svg>
+            <span>Warenkorb</span>
+            <strong id="cart-count">0</strong>
+          </button>
+        </div>
+      </header>
+
+      <main>
+        <section id="discover-view" class="view-section">
+          <div class="hero-wrap">
+            <span class="hero-glow hero-glow-one" aria-hidden="true"></span>
+            <span class="hero-glow hero-glow-two" aria-hidden="true"></span>
+            <div class="hero-copy">
+              <span class="eyebrow"><span class="pulse-dot"></span> Nur für deine Familie</span>
+              <h1>Alle Lieblingsshops.<br /><em>Ein magischer Korb.</em></h1>
+              <p>Produkte entdecken, Preise vergleichen und bequem mit Korbio Token bezahlen. Korbio sortiert deinen Einkauf automatisch nach Händler.</p>
+              <div class="hero-actions">
+                <button class="hero-primary" type="button" data-scroll-catalog>Jetzt entdecken <span>→</span></button>
+                <button class="hero-secondary" type="button" data-info="tokens">So funktionieren Tokens</button>
+              </div>
+              <div class="hero-stats" aria-label="App-Vorteile">
+                <span><strong id="catalog-count">0</strong> Produkte im Katalog</span>
+                <span><strong>+ 0,10 €</strong> transparent je Artikel</span>
+                <span><strong>1 Token</strong> entspricht 0,01 €</span>
+              </div>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+              <div class="orbit orbit-one"></div>
+              <div class="orbit orbit-two"></div>
+              <div class="hero-bag">
+                <span class="bag-handle"></span>
+                <span class="bag-face">◡</span>
+                <span class="float-item float-a">🥑</span>
+                <span class="float-item float-b">🥖</span>
+                <span class="float-item float-c">🍅</span>
+                <span class="float-item float-d">🧴</span>
+              </div>
+              <div class="mini-ticket">
+                <span>Dein Auftrag</span>
+                <strong>4 Läden · 8 Artikel</strong>
+                <i></i>
+              </div>
+              <div class="secure-pill"><span>●</span> Private Familienkasse</div>
+            </div>
+          </div>
+
+          <div class="data-notice" id="data-notice">
+            <span class="notice-icon" aria-hidden="true">✓</span>
+            <div>
+              <strong>Echte Preisbelege, ehrlich mit Ort und Datum</strong>
+              <p><span id="verified-count">0</span> Preise sind öffentlich belegt. Marktpreise können sich seit dem angegebenen Beobachtungsdatum ändern.</p>
+            </div>
+            <button type="button" id="notice-close" aria-label="Hinweis schließen">×</button>
+          </div>
+
+          <section class="catalog-section" aria-labelledby="shops-title">
+            <div class="section-heading">
+              <div>
+                <span class="kicker">Deine Auswahl</span>
+                <h2 id="shops-title">Wo möchtest du einkaufen?</h2>
+              </div>
+              <div class="rail-controls" aria-hidden="true">
+                <button type="button" id="shop-prev">←</button>
+                <button type="button" id="shop-next">→</button>
+              </div>
+            </div>
+            <div class="shop-rail" id="shop-rail" role="list" aria-label="Händler"></div>
+
+            <div class="catalog-toolbar">
+              <label class="search-box">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+                <input id="search-input" type="search" placeholder="Produkte, Marken oder Händler suchen …" autocomplete="off" />
+                <kbd>⌘ K</kbd>
+              </label>
+              <button class="filter-toggle" type="button" id="verified-toggle" aria-pressed="false">
+                <span class="verified-dot"></span> Nur belegte Preise
+              </button>
+            </div>
+
+            <div class="category-rail" id="category-rail" aria-label="Produktkategorien"></div>
+
+            <div class="results-heading">
+              <div>
+                <h3 id="results-title">Für dich ausgewählt</h3>
+                <p id="results-meta">Produkte aus allen Händlern</p>
+              </div>
+              <label class="sort-label">Sortieren
+                <select id="sort-select">
+                  <option value="featured">Empfohlen</option>
+                  <option value="price-asc">Preis aufsteigend</option>
+                  <option value="price-desc">Preis absteigend</option>
+                  <option value="shop">Händler A–Z</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="product-grid" id="product-grid" aria-live="polite"></div>
+            <button class="load-more-button" id="load-more" type="button" hidden>Mehr laden</button>
+            <div class="empty-state" id="empty-state" hidden>
+              <span>🔎</span>
+              <h3>Nichts Passendes gefunden</h3>
+              <p>Versuche einen anderen Suchbegriff oder zeige wieder alle Händler.</p>
+              <button class="primary-button" type="button" id="reset-filters">Alle Produkte zeigen</button>
+            </div>
+          </section>
+        </section>
+
+        <section id="orders-view" class="view-section orders-view" hidden>
+          <div class="orders-hero">
+            <div>
+              <span class="eyebrow"><span class="pulse-dot"></span> Einkaufsmodus</span>
+              <h1>Deine Aufträge,<br /><em>sauber sortiert.</em></h1>
+              <p>Hier siehst du, was du in welchem Laden kaufen sollst. Hake jedes Produkt direkt beim Einkauf ab.</p>
+            </div>
+            <div class="payout-card" id="payout-card">
+              <span class="payout-card-brand">Korbio Wallet</span>
+              <strong id="payout-title">0 Familien-Token verfügbar</strong>
+              <p id="payout-description">Alle bestätigten Familienbeiträge landen im gemeinsamen Guthaben.</p>
+              <button type="button" id="connect-payout">Tokens verwalten</button>
+            </div>
+          </div>
+          <div class="order-list" id="order-list"></div>
+          <div class="empty-orders" id="empty-orders">
+            <div>🧾</div>
+            <h2>Noch kein Auftrag</h2>
+            <p>Lege Produkte in den Warenkorb und bezahle den Auftrag aus der privaten Familienkasse.</p>
+            <button class="primary-button" type="button" data-view="discover">Produkte entdecken</button>
+          </div>
+        </section>
+
+        <section id="support-view" class="view-section support-view" hidden>
+          <div class="support-hero">
+            <div>
+              <span class="eyebrow"><span class="pulse-dot"></span> Dein Ausbauplan</span>
+              <h1>Was Korbio als<br /><em>Nächstes braucht.</em></h1>
+              <p>Hier siehst du ehrlich, welche Händler schon Daten liefern, welche Freigaben fehlen und was vor echten Bestellungen erledigt werden muss.</p>
+              <button class="hero-secondary" type="button" data-info="catalogfile">Format für Katalogdateien ansehen</button>
+            </div>
+            <div class="support-progress-card">
+              <div class="support-progress" id="support-progress"><div><strong>0%</strong><span>bereit</span></div></div>
+              <p id="support-progress-copy">0 von 8 Schritten erledigt</p>
+              <small>Hake erledigte Aufgaben unten ab. Der Fortschritt bleibt auf deinem Gerät gespeichert.</small>
+            </div>
+          </div>
+
+          <div class="support-section-heading">
+            <div><span class="kicker">Ziel: über 1.000 echte Produkte je Shop</span><h2>Online-Shops anbinden</h2></div>
+            <p>Produkte und Preise dürfen erst nach einem autorisierten API- oder Feed-Zugang importiert werden.</p>
+          </div>
+          <div class="integration-grid" id="integration-grid"></div>
+
+          <div class="support-section-heading checklist-heading">
+            <div><span class="kicker">Persönliche Checkliste</span><h2>Deine nächsten Schritte</h2></div>
+            <p>Arbeite die Punkte in dieser Reihenfolge ab. Korbio zeigt dir jederzeit den aktuellen Stand.</p>
+          </div>
+          <div class="improvement-list" id="improvement-list"></div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="brand footer-brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 44 44"><path d="M10 18h24l-2.5 16.5A4 4 0 0 1 27.6 38H16.4a4 4 0 0 1-3.9-3.5L10 18Z"/><path d="M16 20c0-8 2.5-13 6-13s6 5 6 13" class="brand-handle"/></svg></span><span>Korbio</span></div>
+        <p>Preisbeobachtungen: Open Prices / Open Food Facts (ODbL). Markt und Datum stehen an jedem Produkt.</p>
+        <div><button type="button" data-info="privacy">Datenschutz</button><button type="button" data-info="legal">Impressum</button><button type="button" data-info="sources">Preisquellen</button></div>
+      </footer>
+    </div>
+
+    <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+    <aside class="cart-drawer" id="cart-drawer" aria-labelledby="cart-title" aria-hidden="true">
+      <div class="drawer-header">
+        <div><span class="kicker">Deine Auswahl</span><h2 id="cart-title">Warenkorb</h2></div>
+        <button class="drawer-close" type="button" id="cart-close" aria-label="Warenkorb schließen">×</button>
+      </div>
+      <div class="cart-content" id="cart-content"></div>
+      <div class="cart-summary" id="cart-summary"></div>
+    </aside>
+
+    <dialog class="checkout-dialog" id="checkout-dialog">
+      <form method="dialog" id="checkout-form">
+        <div class="dialog-header">
+          <div><span class="kicker">Fast geschafft</span><h2>Mit Tokens bezahlen</h2></div>
+          <button type="button" class="drawer-close" data-dialog-close aria-label="Dialog schließen">×</button>
+        </div>
+        <div class="checkout-banner" id="checkout-banner">
+          <span>🪙</span>
+          <p><strong id="checkout-mode-title">Private Familienkasse</strong> <span id="checkout-mode-copy">Der Betrag wird sicher vom gemeinsamen Serverguthaben abgezogen.</span></p>
+        </div>
+        <div class="form-grid">
+          <label>Vorname und Nachname<input name="name" required placeholder="Max Mustermann" /></label>
+          <label>Telefon<input name="phone" inputmode="tel" required placeholder="+49 170 1234567" /></label>
+          <label class="full-field">Lieferadresse<input name="address" required placeholder="Musterstraße 12, 10115 Berlin" /></label>
+          <label class="full-field">Hinweis (optional)<textarea name="note" rows="3" placeholder="Bitte kurz anrufen …"></textarea></label>
+        </div>
+        <div class="token-payment-card" id="token-payment-card">
+          <span class="token-coin large" aria-hidden="true">K</span>
+          <div><small>Dein Guthaben</small><strong id="checkout-token-balance">0 Token</strong><p id="checkout-token-status">Guthaben wird geprüft …</p></div>
+          <button type="button" id="checkout-topup">Nachladen</button>
+        </div>
+        <div class="provider-note"><span>Familie</span><p>1 Token = 0,01 €. Nur bestätigte Familienbeiträge werden durch den Familienadmin gutgeschrieben.</p></div>
+        <button class="payment-help" type="button" data-info="tokens">Warum gibt es jetzt Tokens?</button>
+        <label class="consent-row"><input type="checkbox" name="consent" required /><span id="consent-copy">Ich bestätige den Familienauftrag und die angezeigte Token-Summe.</span></label>
+        <div class="dialog-total" id="dialog-total"></div>
+        <button class="checkout-submit" id="checkout-submit" type="submit"><span class="submit-copy">Mit Tokens bezahlen</span><span>→</span></button>
+      </form>
+    </dialog>
+
+    <dialog class="token-dialog" id="token-dialog">
+      <div class="dialog-header">
+        <div><span class="kicker">Dein Guthaben</span><h2>Korbio Token</h2></div>
+        <button type="button" class="drawer-close" data-token-close aria-label="Token-Fenster schließen">×</button>
+      </div>
+      <div class="wallet-hero">
+        <span class="token-coin wallet-coin" aria-hidden="true">K</span>
+        <div><small>Aktueller Stand</small><strong><b id="wallet-balance">0</b> Token</strong><p id="wallet-value">entspricht 0,00 € Einkaufswert</p></div>
+        <span class="wallet-mode" id="wallet-mode">Privat</span>
+      </div>
+      <div class="token-dialog-body">
+        <div class="token-explainer"><strong>1 Token = 0,01 €</strong><span>Familienbeitrag bar oder per Überweisung geben, bestätigen lassen und gemeinsam ausgeben.</span></div>
+        <h3>Familienbeitrag vorbereiten</h3>
+        <div class="token-package-grid" id="token-package-grid"></div>
+        <div class="family-transfer" id="family-transfer" hidden>
+          <div><span id="contribution-title">Beitrag vorbereitet</span><h3 id="transfer-amount">0,00 €</h3></div>
+          <dl><div><dt>Kontoinhaber</dt><dd id="transfer-holder">–</dd></div><div><dt>IBAN</dt><dd id="transfer-iban">–</dd></div><div><dt>Verwendungszweck</dt><dd id="transfer-reference">–</dd></div></dl>
+          <p id="contribution-instructions">Gib den Betrag an den Familienadmin. Danach bestätigt er den Eingang.</p>
+        </div>
+        <div class="wallet-notice" id="wallet-notice">Nur tatsächlich eingegangene Familienbeiträge werden gutgeschrieben.</div>
+        <section class="family-admin-panel" id="family-admin-panel" hidden>
+          <h3>Familienadmin</h3>
+          <p>Bestätige Beiträge erst, wenn das Geld wirklich angekommen ist.</p>
+          <div id="pending-topups"></div>
+          <form id="family-adjustment-form">
+            <h4>Korrekturbuchung</h4>
+            <label>Token (+ oder −)<input name="amountTokens" type="number" step="1" required placeholder="z. B. -50" /></label>
+            <label>Grund<input name="reason" required maxlength="100" placeholder="z. B. Preisunterschied" /></label>
+            <button type="submit">Korrektur buchen</button>
+          </form>
+        </section>
+        <div class="wallet-history" id="wallet-history"></div>
+      </div>
+    </dialog>
+
+    <dialog class="family-login-dialog" id="family-login-dialog">
+      <form id="family-login-form">
+        <div class="family-login-brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 44 44"><path d="M10 18h24l-2.5 16.5A4 4 0 0 1 27.6 38H16.4a4 4 0 0 1-3.9-3.5L10 18Z"/><path d="M16 20c0-8 2.5-13 6-13s6 5 6 13" class="brand-handle"/></svg></span><span>Korbio</span></div>
+        <span class="kicker">Private Familienkasse</span>
+        <h2>Willkommen<br />in eurer Familie.</h2>
+        <p id="family-login-status">Melde dich mit eurem gemeinsamen Familienpasswort an.</p>
+        <label>Dein Name<input name="memberName" required minlength="2" maxlength="50" autocomplete="name" placeholder="z. B. Anna" /></label>
+        <label>Familien- oder Adminpasswort<input name="password" type="password" required minlength="10" autocomplete="current-password" placeholder="••••••••••••" /></label>
+        <button type="submit" id="family-login-submit">Familienkasse öffnen <span>→</span></button>
+        <small>Die Zugangsdaten werden nur an deinen eigenen Korbio-Server gesendet.</small>
+      </form>
+    </dialog>
+
+    <dialog class="info-dialog" id="info-dialog">
+      <div class="dialog-header"><div><span class="kicker">Korbio MVP</span><h2 id="info-title">Information</h2></div><button type="button" class="drawer-close" data-info-close aria-label="Dialog schließen">×</button></div>
+      <div class="info-content" id="info-content"></div>
+    </dialog>
+
+    <nav class="mobile-nav" aria-label="Mobile Navigation">
+      <button class="is-active" type="button" data-view="discover"><span>⌂</span>Entdecken</button>
+      <button type="button" data-mobile-search><span>⌕</span>Suchen</button>
+      <button type="button" data-view="orders"><span>☷</span>Aufträge</button>
+      <button type="button" data-view="support"><span>?</span>Support</button>
+      <button type="button" id="mobile-cart"><span>🛒</span>Korb <b id="mobile-cart-count">0</b></button>
+    </nav>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "id": "/",
+  "name": "Korbio – alles in einem Korb",
+  "short_name": "Korbio",
+  "description": "Händler vergleichen, Produkte sammeln und Einkaufsaufträge verwalten.",
+  "lang": "de-DE",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f4ee",
+  "theme_color": "#3427d6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
